@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+html{
+  font-size: 14px;
+}
+.invite-card__page {
+  background: rgb(192, 192, 192);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+  radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%),
+  radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%),
+  radial-gradient(circle closest-side at 42% 22%, #d35 43%, rgba(221,51,85,0) 45%),
+  radial-gradient(circle closest-side at 58% 22%, #d35 43%, rgba(221,51,85,0) 45%),
+  radial-gradient(circle closest-side at 50% 35%, #d35 32%, rgba(221,51,85,0) 27%),
+  
+  radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
+  radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
+  radial-gradient(circle closest-side at 40% 22%, #d35 40%, rgba(221,51,85,0) 45%) 52px 50px,
+  radial-gradient(circle closest-side at 60% 22%, #d35 40%, rgba(221,51,85,0) 45%) 48px 50px,
+  radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 37%) 50px 50px;
+  background-color:#b03;
+  background-size:100px 100px;
+
+
+  &__envelope {
+    background: transparent;
+    aspect-ratio: 16/9;
+    width: 90%;
+    max-width: 500px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .top__wrap {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 16/9;
+      perspective: 1000px;
+      position: fixed;
+      display: flex;
+      filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.178));
+    }
+    .envelope__top {
+      position: relative;
+      width: 100%;
+      height: 70%;
+      top: 0px;
+      perspective-origin: center center;
+      transform-origin: center top 0;
+      animation: normal openAnimation 2s;
+      transform: translateZ(-10px);
+      background: rgb(255, 255, 255);
+      clip-path: polygon(0 0, 100% 0%, 100% 54%, 50% 100%, 0 55%);
+    }
+    &.open {
+      .top__wrap {
+        z-index: 0;
+        .envelope__top {
+          transform: rotateX(180deg);
+          animation: normal openAnimation 0.2s;
+        }
+      }
+      .inside__card {
+        box-shadow: none;
+        filter: none;
+        transform: translateY(-10%);
+        transition: all 1s ease-in-out;
+      }
+    }
+    &.close {
+      .top__wrap {
+        z-index: 5;
+        .envelope__top {
+          transform: rotateX(0deg);
+          animation: normal closeAnimation 0.8s;
+        }
+      }
+      .inside__card {
+        box-shadow: none;
+        filter: none;
+        transform: translateY(0px);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+    .envelope__bottom {
+      background: rgb(255, 255, 255);
+      clip-path: polygon(0 43%, 50% 0, 100% 43%, 100% 100%, 0% 100%);
+      position: absolute;
+      width: 100%;
+      height: 70%;
+      bottom: 0;
+      z-index: 2;
+    }
+    .envelope__left {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      bottom: 0;
+      z-index: 1;
+      background: rgb(255, 255, 255);
+      clip-path: polygon(0 0, 0% 100%, 100% 50%);
+    }
+    .envelope__right {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      background: rgb(255, 255, 255);
+      clip-path: polygon(100% 0, 0% 50%, 100% 100%);
+    }
+  }
+  &__card {
+    background: transparent;
+    aspect-ratio: 9/16;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .inside__card {
+    margin: 0 auto;
+    width: 92%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    background: #141414;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #333;
+    filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.014));
+    transform: translateY(-100px);
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    color: #ffffff;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+
+@keyframes openAnimation {
+  0% {
+    top: 0;
+    transform: rotateX(0deg);
+  }
+  100% {
+    z-index: 1;
+    transform: rotateX(180deg);
+  }
+}
+
+@keyframes closeAnimation {
+  0% {
+    z-index: 1;
+    transform: rotateX(180deg);
+  }
+  100% {
+    top: 0;
+    transform: rotateX(0deg);
+  }
+}
+.envelope__wrap {
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.171));
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+}
+.envelope__back {
+  background: #ffffff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.zi-1 {
+  z-index: 1;
+}
+.zi-2 {
+  z-index: 2;
+}
+.zi-3 {
+  z-index: 3;
+}
+.zi-4 {
+  z-index: 4;
+}
+.zi-5 {
+  z-index: 5;
+}
+
+.down {
+  transform: translateY(300px);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.up {
+  transform: translateY(0px);
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
